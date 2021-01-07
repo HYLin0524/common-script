@@ -29,7 +29,7 @@ spec:
       pwd
       ls -l
     image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
-    name: git-clone
+    name: check-current-path
     resources: { }
   - args:
     - '[ -d /builder/home ] || mkdir -p /builder && ln -s /tekton/home /builder/home'
