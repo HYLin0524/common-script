@@ -4,13 +4,12 @@ metadata:
   name: git-clone-pr
 spec:
   workspaces:
-  - name: pipeline-ws
+  - name: output
     description: The git repo will be cloned onto the volume backing this workspace
-    mountPath: /pipeline-ws
+    mountPath: /workspace
   steps:
   - script: |
       #!/usr/bin/env bash
-      pwd && echo "<< this is current dir"
       export SUBDIR="source"
       echo "git cloning url: $REPO_URL version $PULL_PULL_SHA to dir: $SUBDIR"
       git config --global --add user.name ${GIT_AUTHOR_NAME:-jenkins-x-bot}
@@ -23,14 +22,7 @@ spec:
     image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
     name: git-clone
     resources: { }
-    workingDir: /pipeline-ws
-  - script: |
-      #!/usr/bin/env sh
-      pwd && ls -l
-    image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
-    name: check-path
-    resources: {}
-    workingDir: /pipeline-ws
+    workingDir: /workspace
   - args:
     - '[ -d /builder/home ] || mkdir -p /builder && ln -s /tekton/home /builder/home'
     command:
@@ -54,4 +46,4 @@ spec:
     - jx
     image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
     name: git-merge
-    workingDir: /pipeline-ws/source
+    workingDir: /workspace/source
