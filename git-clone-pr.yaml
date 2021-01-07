@@ -4,9 +4,9 @@ metadata:
   name: git-clone-pr
 spec:
   workspaces:
-  - name: stage-ws
+  - name: pipeline-ws
     description: The git repo will be cloned onto the volume backing this workspace
-#     mountPath: /workspace
+    mountPath: /pipeline-ws
   steps:
   - script: |
       #!/usr/bin/env bash
