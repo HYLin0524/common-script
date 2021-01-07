@@ -25,12 +25,12 @@ spec:
     resources: { }
     workingDir: /pipeline-ws
   - script: |
-      #!/usr/bin/env bash
-      pwd
-      ls -l
+      #!/usr/bin/env sh
+      pwd && ls -l
     image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
-    name: check-current-path
-    resources: { }
+    name: check-path
+    resources: {}
+    workingDir: /pipeline-ws
   - args:
     - '[ -d /builder/home ] || mkdir -p /builder && ln -s /tekton/home /builder/home'
     command:
@@ -54,4 +54,4 @@ spec:
     - jx
     image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
     name: git-merge
-    workingDir: /stage-ws/source
+    workingDir: /pipeline-ws/source
