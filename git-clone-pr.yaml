@@ -6,10 +6,11 @@ spec:
   workspaces:
   - name: pipeline-ws
     description: The git repo will be cloned onto the volume backing this workspace
-    mountPath: /pipeline-ws
+    # mountPath: /pipeline-ws
   steps:
   - script: |
       #!/usr/bin/env bash
+      pwd && echo "<< this is current dir"
       export SUBDIR="source"
       echo "git cloning url: $REPO_URL version $PULL_PULL_SHA to dir: $SUBDIR"
       git config --global --add user.name ${GIT_AUTHOR_NAME:-jenkins-x-bot}
