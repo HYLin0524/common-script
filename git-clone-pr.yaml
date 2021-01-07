@@ -22,7 +22,7 @@ spec:
     image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
     name: git-clone
     resources: { }
-    workingDir: /workspace
+    workingDir: /pipeline-ws
   - args:
     - '[ -d /builder/home ] || mkdir -p /builder && ln -s /tekton/home /builder/home'
     command:
@@ -46,4 +46,4 @@ spec:
     - jx
     image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
     name: git-merge
-    workingDir: /workspace/source
+    workingDir: /pipeline-ws/source
