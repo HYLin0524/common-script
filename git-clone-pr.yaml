@@ -4,7 +4,7 @@ metadata:
   name: git-clone-pr
 spec:
   workspaces:
-  - name: output
+  - name: stage-ws
     description: The git repo will be cloned onto the volume backing this workspace
 #     mountPath: /workspace
   steps:
