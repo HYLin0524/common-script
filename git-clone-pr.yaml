@@ -4,9 +4,9 @@ metadata:
   name: git-clone-pr
 spec:
   workspaces:
-  - name: stage-ws
+  - name: pipeline-ws
     description: The git repo will be cloned onto the volume backing this workspace
-    # mountPath: /pipeline-ws
+    mountPath: /pipeline-ws
   steps:
   - script: |
       #!/usr/bin/env bash
@@ -23,7 +23,14 @@ spec:
     image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
     name: git-clone
     resources: { }
-    workingDir: /stage-ws
+    workingDir: /pipeline-ws
+  - script: |
+      #!/usr/bin/env bash
+      pwd
+      ls -l
+    image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
+    name: git-clone
+    resources: { }
   - args:
     - '[ -d /builder/home ] || mkdir -p /builder && ln -s /tekton/home /builder/home'
     command:
